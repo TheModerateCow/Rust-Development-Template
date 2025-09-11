@@ -1,6 +1,6 @@
 {
   "name": "Rust Development Container",
-  "image": "mcr.microsoft.com/devcontainers/rust:1-1-bullseye",
+  "image": "ubuntu:24.04",
 
   // Features to add to the dev container. More info: https://containers.dev/features
   "features": {
@@ -34,12 +34,25 @@
       ],
       // Set *default* container specific settings.json values on container create
       "settings": {
-        // "rust-analyzer.checkOnSave.command": "clippy",
+        "rust-analyzer.restartServerOnConfigChange": true,
+        "rust-analyzer.runnables.extraEnv": {"PATH": "${env:HOME}/.cargo/bin:${env:PATH}"},
+        "rust-analyzer.checkOnSave.command": "clippy",
         "editor.defaultFormatter": "rust-lang.rust-analyzer",
         "rust-analyzer.checkOnSave": true,
         "rust-analyzer.cargo.allFeatures": true,
         "rust-analyzer.procMacro.enable": true,
-        "editor.formatOnSave": true
+        "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+        "rust-analyzer.completion.addCallArgumentSnippets": true,
+        "rust-analyzer.completion.addCallParenthesis": true,
+        "rust-analyzer.inlayHints.enable": true,
+        "rust-analyzer.inlayHints.chainingHints": true,
+        "rust-analyzer.inlayHints.parameterHints": true,
+        "rust-analyzer.inlayHints.typeHints": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "files.watcherExclude": {
+          "**/target/**": true
+        }
       }
     }
   },
@@ -48,7 +61,7 @@
   // "forwardPorts": [8080],
 
   // Use 'postCreateCommand' to run commands after the container is created
-  "postCreateCommand": "rustc --version && cargo --version",
+  "postCreateCommand": ".devcontainer/postCreate.sh",
 
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
   "remoteUser": "root",
@@ -62,7 +75,7 @@
   "mounts": [
     // Mount the cargo registry to speed up builds
     "source=rust-cargo-registry,target=/usr/local/cargo/registry,type=volume"
-  ],
+  ]
 
 // "networks": [""]
 }
