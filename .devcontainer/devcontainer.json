@@ -105,8 +105,10 @@
   ],
 
   // Configure lifecycle scripts
-  "initializeCommand": "echo 'Initializing Ubuntu Noble development environment...'"
+  "initializeCommand": "echo 'Initializing Ubuntu Noble development environment...'",
 
   // Additional apt packages to install - Noble has newer package versions available
   // "onCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev curl wget unzip tree htop neofetch ripgrep fd-find bat exa zoxide"
+
+  "runArgs": ["--network=host"]
 }
