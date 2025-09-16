@@ -22,15 +22,12 @@
       "version": "lts",
       "nodeGypDependencies": true
     },
-    // "ghcr.io/devcontainers/features/python:1": {
-    //   "version": "3.12"
-    // },
-    // "ghcr.io/devcontainers/features/docker-in-docker:2": {
-    //   "version": "latest",
-    //   "enableNonRootDocker": true
-    // },
     "ghcr.io/devcontainers/features/go:1": {
       "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": true
     }
   },
 
@@ -73,7 +70,7 @@
         "go.toolsManagement.checkForUpdates": "local",
         "go.useLanguageServer": true,
         "files.eol": "\n",
-        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.defaultProfile.linux": "bash",
         "editor.tabSize": 4,
         "editor.insertSpaces": true
       }

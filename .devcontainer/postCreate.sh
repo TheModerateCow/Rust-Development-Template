@@ -1,12 +1,9 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install -y \ 
-    # build-essential \
-    # pkg-config \
-    # libssl-dev \
+sudo apt-get install -y \
     curl \
     wget \
-    unzip \
+    unzip
 
 echo 'Ubuntu Noble container created successfully!'
 rustc --version

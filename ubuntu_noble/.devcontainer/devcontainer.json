@@ -74,7 +74,7 @@
         "go.toolsManagement.checkForUpdates": "local",
         "go.useLanguageServer": true,
         "files.eol": "\n",
-        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.defaultProfile.linux": "bash",
         "editor.tabSize": 4,
         "editor.insertSpaces": true
       }
