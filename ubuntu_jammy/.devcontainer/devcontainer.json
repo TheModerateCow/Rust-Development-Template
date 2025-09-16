@@ -1,6 +1,6 @@
 {
-  "name": "Ubuntu Noble Development Container",
-  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "name": "Ubuntu Jammy Development Container",
+  "image": "mcr.microsoft.com/devcontainers/base:1-jammy",
 
   // Features to add to the dev container. More info: https://containers.dev/features
   "features": {
@@ -12,6 +12,7 @@
       "upgradePackages": true
     },
     "ghcr.io/devcontainers/features/git:1": {
+      "ppa": true,
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/rust:1": {
@@ -22,15 +23,12 @@
       "version": "lts",
       "nodeGypDependencies": true
     },
-    // "ghcr.io/devcontainers/features/python:1": {
-    //   "version": "3.12"
-    // },
-    // "ghcr.io/devcontainers/features/docker-in-docker:2": {
-    //   "version": "latest",
-    //   "enableNonRootDocker": true
-    // },
-    "ghcr.io/devcontainers/features/go:1": {
-      "version": "latest"
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.10"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": true
     }
   },
 
@@ -48,17 +46,14 @@
         "ms-vscode.cpptools",
         "ms-python.python",
         "ms-python.pylint",
-        "ms-python.black-formatter",
         "ms-vscode.js-debug-nightly",
         "bradlc.vscode-tailwindcss",
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-json",
         "redhat.vscode-yaml",
         "ms-vscode-remote.remote-containers",
-        "golang.go",
         "rooveterinaryinc.roo-cline",
-        "mhutchie.git-graph",
-        "ms-vscode.hexeditor"
+        "mhutchie.git-graph"
       ],
       // Set *default* container specific settings.json values on container create
       "settings": {
@@ -70,21 +65,17 @@
         "python.defaultInterpreterPath": "/usr/local/bin/python",
         "python.linting.enabled": true,
         "python.linting.pylintEnabled": true,
-        "go.toolsManagement.checkForUpdates": "local",
-        "go.useLanguageServer": true,
         "files.eol": "\n",
-        "terminal.integrated.defaultProfile.linux": "zsh",
-        "editor.tabSize": 4,
-        "editor.insertSpaces": true
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally
-  "forwardPorts": [3000, 8000, 8080, 9000, 5000],
+  "forwardPorts": [3000, 8000, 8080, 9000],
 
   // Use 'postCreateCommand' to run commands after the container is created
-  "postCreateCommand": ".devcontainer/postCreate.sh",
+  "postCreateCommand": "echo 'Container created successfully!' && rustc --version && cargo --version && node --version && python3 --version && docker --version",
 
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
   "remoteUser": "vscode",
@@ -92,24 +83,20 @@
   // Configure the container's environment
   "containerEnv": {
     "RUST_BACKTRACE": "1",
-    "CARGO_NET_GIT_FETCH_WITH_CLI": "true",
-    "PYTHONPATH": "/workspaces",
-    "GO111MODULE": "on"
+    "CARGO_NET_GIT_FETCH_WITH_CLI": "true"
   },
 
   // Mounts
   "mounts": [
     // Mount the cargo registry to speed up builds
     "source=rust-cargo-registry,target=/usr/local/cargo/registry,type=volume",
-    // Mount Go module cache
-    "source=go-mod-cache,target=/go/pkg/mod,type=volume",
     // Mount Docker socket for Docker-in-Docker
     "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
   ],
 
   // Configure lifecycle scripts
-  "initializeCommand": "echo 'Initializing Ubuntu Noble development environment...'"
+  "initializeCommand": "echo 'Initializing Ubuntu Jammy development environment...'",
 
-  // Additional apt packages to install - Noble has newer package versions available
-  // "onCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev curl wget unzip tree htop neofetch ripgrep fd-find bat exa zoxide"
+  // Additional apt packages to install
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev curl wget unzip tree htop neofetch"
 }

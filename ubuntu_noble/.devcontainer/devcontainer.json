@@ -1,6 +1,6 @@
 {
   "name": "Ubuntu Noble Development Container",
-  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/base:1-noble",
 
   // Features to add to the dev container. More info: https://containers.dev/features
   "features": {
@@ -12,6 +12,7 @@
       "upgradePackages": true
     },
     "ghcr.io/devcontainers/features/git:1": {
+      "ppa": true,
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/rust:1": {
@@ -22,13 +23,13 @@
       "version": "lts",
       "nodeGypDependencies": true
     },
-    // "ghcr.io/devcontainers/features/python:1": {
-    //   "version": "3.12"
-    // },
-    // "ghcr.io/devcontainers/features/docker-in-docker:2": {
-    //   "version": "latest",
-    //   "enableNonRootDocker": true
-    // },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": true
+    },
     "ghcr.io/devcontainers/features/go:1": {
       "version": "latest"
     }
@@ -84,7 +85,7 @@
   "forwardPorts": [3000, 8000, 8080, 9000, 5000],
 
   // Use 'postCreateCommand' to run commands after the container is created
-  "postCreateCommand": ".devcontainer/postCreate.sh",
+  "postCreateCommand": "echo 'Ubuntu Noble container created successfully!' && rustc --version && cargo --version && node --version && python3 --version && go version && docker --version",
 
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
   "remoteUser": "vscode",
@@ -108,8 +109,8 @@
   ],
 
   // Configure lifecycle scripts
-  "initializeCommand": "echo 'Initializing Ubuntu Noble development environment...'"
+  "initializeCommand": "echo 'Initializing Ubuntu Noble development environment...'",
 
   // Additional apt packages to install - Noble has newer package versions available
-  // "onCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev curl wget unzip tree htop neofetch ripgrep fd-find bat exa zoxide"
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential pkg-config libssl-dev curl wget unzip tree htop neofetch ripgrep fd-find bat exa zoxide"
 }
